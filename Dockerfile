@@ -24,7 +24,7 @@ COPY artifacts/api-server/tsconfig.json ./artifacts/api-server/
 COPY artifacts/api-server/build.mjs ./artifacts/api-server/
 COPY artifacts/api-server/src ./artifacts/api-server/src
 
-RUN pnpm install --frozen-lockfile
+RUN pnpm install --no-frozen-lockfile
 
 RUN pnpm --filter @workspace/db run build
 RUN pnpm --filter @workspace/api-server run build
