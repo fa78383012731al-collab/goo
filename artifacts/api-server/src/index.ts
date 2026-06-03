@@ -9,15 +9,17 @@ if (!rawPort) throw new Error("PORT environment variable is required but was not
 const port = Number(rawPort);
 if (Number.isNaN(port) || port <= 0) throw new Error(`Invalid PORT value: "${rawPort}"`);
 
-const DOMAIN = process.env.REPLIT_DOMAINS?.split(",")[0];
+const DOMAIN =
+  process.env.RENDER_EXTERNAL_URL ||
+  (process.env.REPLIT_DOMAINS ? `https://${process.env.REPLIT_DOMAINS.split(",")[0]}` : null);
 const WEBHOOK_PATH = "/api/bot/webhook";
-const WEBHOOK_URL = DOMAIN ? `https://${DOMAIN}${WEBHOOK_PATH}` : null;
+const WEBHOOK_URL = DOMAIN ? `${DOMAIN}${WEBHOOK_PATH}` : null;
 const PING_INTERVAL_MS = 4 * 60 * 1000;
 
 function startSelfPing() {
   if (!DOMAIN) return;
 
-  const pingUrl = `https://${DOMAIN}/api/healthz`;
+  const pingUrl = `${DOMAIN}/api/healthz`;
 
   setInterval(() => {
     const mod = pingUrl.startsWith("https") ? https : http;
