@@ -6,6 +6,9 @@ import { logger } from "../lib/logger";
 const SCOPES = ["https://www.googleapis.com/auth/drive"];
 
 export function getCallbackUrl(): string {
+  if (process.env.RENDER_EXTERNAL_URL) {
+    return `${process.env.RENDER_EXTERNAL_URL}/api/auth/google/callback`;
+  }
   const domain = process.env.REPLIT_DOMAINS?.split(",")[0];
   return `https://${domain}/api/auth/google/callback`;
 }
