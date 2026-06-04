@@ -25,9 +25,6 @@ COPY lib/db/tsconfig.json ./lib/db/
 COPY lib/db/drizzle.config.ts ./lib/db/
 COPY lib/db/src ./lib/db/src
 
-COPY lib/api-zod/package.json ./lib/api-zod/
-COPY lib/api-zod/src ./lib/api-zod/src
-
 # Copy the api-server artifact
 COPY artifacts/api-server/package.json ./artifacts/api-server/
 COPY artifacts/api-server/tsconfig.json ./artifacts/api-server/
