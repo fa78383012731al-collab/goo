@@ -59,6 +59,11 @@ app.listen(port, async (err) => {
 
   startSelfPing();
 
+  if (process.env.BOT_DISABLED === "true") {
+    logger.warn("BOT_DISABLED=true — bot not started on this instance");
+    return;
+  }
+
   if (!process.env.TELEGRAM_BOT_TOKEN || !process.env.GOOGLE_SERVICE_ACCOUNT_JSON) {
     logger.warn("Bot credentials missing — bot not started");
     return;
